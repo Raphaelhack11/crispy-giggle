@@ -1,23 +1,20 @@
 {
   "name": "profit-bliss",
   "version": "1.0.0",
-  "description": "Investment platform frontend + backend",
+  "description": "Investment app backend",
   "main": "server/index.js",
+  "type": "module",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js",
-    "build": "cd client && npm install && npm run build"
+    "dev": "nodemon server/index.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
+    "express": "^4.18.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.3.1",
     "body-parser": "^1.20.2"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
-  },
-  "engines": {
-    "node": ">=18.x"
+    "nodemon": "^3.0.1"
   }
 }
