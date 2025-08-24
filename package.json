@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Investment platform frontend + backend",
   "main": "server/index.js",
-  "type": "module",
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
