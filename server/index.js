@@ -1,38 +1,31 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import authRoutes from "./routes/auth.js";
-import investmentRoutes from "./routes/investments.js";
-import transactionRoutes from "./routes/transactions.js";
-
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
-
-// API routes
-app.use("/api/auth", authRoutes);
-app.use("/api/investments", investmentRoutes);
-app.use("/api/transactions", transactionRoutes);
-
-// Serve React frontend
+// Setup dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+// Initialize app
+dotenv.config();
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Serve React frontend
+const clientBuildPath = path.join(__dirname, "../client/build");
+app.use(express.static(clientBuildPath));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.join(clientBuildPath, "index.html"));
 });
 
+// Start server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
