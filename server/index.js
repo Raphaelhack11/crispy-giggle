@@ -1,12 +1,13 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
-const path = require("path");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import bodyParser from "body-parser";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const authRoutes = require("./routes/auth");
-const investmentRoutes = require("./routes/investments");
-const transactionRoutes = require("./routes/transactions");
+import authRoutes from "./routes/auth.js";
+import investmentRoutes from "./routes/investments.js";
+import transactionRoutes from "./routes/transactions.js";
 
 dotenv.config();
 
@@ -23,6 +24,9 @@ app.use("/api/investments", investmentRoutes);
 app.use("/api/transactions", transactionRoutes);
 
 // Serve React frontend
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("*", (req, res) => {
